@@ -8,7 +8,14 @@
  * - Production: Uses environment variable or fallback URL
  */
 
+// Function to get WebSocket URL (called at runtime, not build time)
 export const getWebSocketUrl = (): string => {
+  // Check if we're in the browser (not during SSR/build)
+  if (typeof window === 'undefined') {
+    // During build/SSR, return a placeholder
+    return '';
+  }
+  
   // In production, we use the environment variable
   if (process.env.NEXT_PUBLIC_WS_URL) {
     return process.env.NEXT_PUBLIC_WS_URL;
@@ -24,5 +31,6 @@ export const getWebSocketUrl = (): string => {
   return 'wss://your-backend-url.railway.app/chess';
 };
 
+// Export the function
 export const WS_URL = getWebSocketUrl();
 

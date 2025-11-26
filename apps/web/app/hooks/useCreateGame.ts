@@ -9,6 +9,12 @@ export function useCreateGame(wsUrl: string = 'ws://localhost:9001/chess') {
 
   const createGame = useCallback((): Promise<number> => {
     return new Promise((resolve, reject) => {
+      // Don't try to connect if we're not in the browser
+      if (typeof window === 'undefined' || !wsUrl) {
+        reject(new Error('WebSocket not available'));
+        return;
+      }
+
       const ws = new WebSocket(wsUrl);
       ws.binaryType = 'arraybuffer';
       wsRef.current = ws;

@@ -43,7 +43,7 @@ export default function Home() {
       setInputGameId(newGameId.toString());
       setGameStarted(true);
     } catch (error) {
-      console.error("Failed to create game:", error);
+      console.log("Failed to create game:", error);
       alert("Failed to create game. Please try again.");
     } finally {
       setCreating(false);

@@ -15,6 +15,11 @@ export function useAvailableGames(wsUrl: string = 'ws://localhost:9001/chess') {
   const [error, setError] = useState<string | null>(null);
 
   const fetchGames = useCallback(() => {
+    // Don't try to connect if we're not in the browser
+    if (typeof window === 'undefined' || !wsUrl) {
+      return;
+    }
+
     setLoading(true);
     setError(null);
 

@@ -283,3 +283,4 @@ wss.on('connection', (ws: WebSocket) => {
 console.log(`WebSocket server is running on ws://localhost:${PORT}/chess`);
 console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 
+

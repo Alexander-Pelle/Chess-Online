@@ -39,6 +39,12 @@ export function useChessWebSocket(gameId: number | null, requestedColor: 'white'
   useEffect(() => {
     console.log(`🔌 useEffect triggered for game ${gameId}, color: ${requestedColor}`);
     
+    // Don't try to connect if we're not in the browser
+    if (typeof window === 'undefined' || !wsUrl) {
+      console.log('⚠️  Not in browser or no wsUrl, skipping WebSocket connection');
+      return;
+    }
+    
     // Prevent duplicate connections (React StrictMode calls useEffect twice)
     if (wsRef.current && (wsRef.current.readyState === WebSocket.CONNECTING || wsRef.current.readyState === WebSocket.OPEN)) {
       console.log('⚠️  WebSocket already active, skipping...');
