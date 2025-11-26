@@ -1,5 +1,5 @@
 import React from 'react';
-import type { GameOverInfo } from '../hooks/useGameOver';
+import type { GameOverInfo } from '../../hooks/useGameOver';
 
 interface Props {
   open: boolean;
